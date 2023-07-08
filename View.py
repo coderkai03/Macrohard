@@ -27,3 +27,8 @@ class View:
             'ZIP': ZIP,
             'address': address
         }
+    
+    #print a list of products
+    def print_products(products):
+        for i in range(len(products)):
+            print(f'{i + 1}. {products[i]}')
