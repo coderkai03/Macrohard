@@ -7,11 +7,14 @@ class Profile:
         'ZIP': None,
         'address': None
     }
+
     user_discounts = {
         'veteran': False,
         'senior': False,
         'student': False
     }
+
+    cart = []
 
     #constructor
     def __init__(s, name, phone, email, ZIP, address):
@@ -30,3 +33,6 @@ class Profile:
         ZIP: {s.user_data['ZIP']}
         Address: {s.user_data['address']}
         '''
+    
+    def add_to_cart(s, product):
+        s.cart.append(product)

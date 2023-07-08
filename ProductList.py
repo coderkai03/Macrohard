@@ -1,9 +1,7 @@
-class ProdList:
-    
-    class Product:
-        def __init__(self, name, price):
-            self.name = name
-            self.price = price
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
 
-        def __str__(self):
-            return f"{self.name} - {self.price}"
+    def __str__(self):
+        return f"{self.name} - {self.price}"

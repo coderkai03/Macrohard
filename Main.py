@@ -12,3 +12,7 @@ print(c1)
 print('Enter a number between 1 and 10.')
 num = View.validate_input(1, 10)
 print(f'You entered {num}')
+
+#add products to cart
+#use return value to add products to cart
+c1.add_to_cart(View.get_products())
