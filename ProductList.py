@@ -1,4 +1,4 @@
-class Product:
+class Products:
     #available products
     computers = [
         ["Dell XPS 15", 1000],
@@ -33,10 +33,13 @@ class Product:
         ["Minecraft", 30]
     ]
 
-    #revise dictionary to be a list with dictionaries
+    compSize = len(computers)
+    periSize = len(peripherals)
+    gameSize = len(games)
+
 
     #function to return one dictionary entry
-    def get_computer(s, category, index):
+    def get_item(s, category, index):
         if (category == 'computers'):
             return s.computers[index]
         elif (category == 'peripherals'):
@@ -44,18 +47,23 @@ class Product:
         elif (category == 'games'):
             return s.games[index]
         
-    def display_cart(s):
+    def display_products(s):
+        prodCount = 1
+
         print("Computers:")
         for item in s.computers:
-            print(f'{item[0]:<15}{item[1]:>5}')
+            print(f'{str(prodCount)+")":<4} {item[0]:<50}${item[1]:>10.2f}')
+            prodCount+=1
         print()
 
         print("Peripherals:")
         for item in s.peripherals:
-            print(f'{item[0]:<15}{item[1]:>5}')
+            print(f'{str(prodCount)+")":<4} {item[0]:<50}${item[1]:>10.2f}')
+            prodCount+=1
         print()
 
         print("Games:")
         for item in s.games:
-            print(f'{item[0]:<15}{item[1]:>5}')
+            print(f'{str(prodCount)+")":<4} {item[0]:<50}${item[1]:>10.2f}')
+            prodCount+=1
         print()
