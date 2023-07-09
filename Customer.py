@@ -35,7 +35,6 @@ class Profile:
         '''
 
     def addItem(s, item):
-        print(item)
         s.cart.append(item)
 
     def removeItem(s, index):
