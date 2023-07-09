@@ -14,8 +14,6 @@ class Profile:
         'student': False
     }
 
-    cart = []
-
     #constructor
     def __init__(s, name, phone, email, ZIP, address):
         s.user_data['name'] = name
@@ -36,3 +34,16 @@ class Profile:
     
     def add_to_cart(s, product):
         s.cart.append(product)
+
+
+class Cart:
+    #member variables
+    computers = {}
+    peripherals = {}
+    games = {}
+
+    def addItem(s, item):
+        s.computers.update({item[0], item[1]})
+
+    # def removeItem(s, index):
+    #     del s.computers[]
