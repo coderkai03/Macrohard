@@ -38,12 +38,31 @@ class Profile:
 
 class Cart:
     #member variables
-    computers = {}
-    peripherals = {}
-    games = {}
+    computers = []
+    peripherals = []
+    games = []
 
     def addItem(s, item):
-        s.computers.update({item[0], item[1]})
+        s.computers.append(item)
 
-    # def removeItem(s, index):
-    #     del s.computers[]
+    def removeItem(s, index):
+        s.computers.pop(index)
+
+    def display_cart(s):
+        if s.computers:
+            print("Computers:")
+            for item in s.computers:
+                print(f'{item[0]:<15}{item[1]:>5}')
+            print()
+
+        if s.peripherals:
+            print("Peripherals:")
+            for item in s.peripherals:
+                print(f'{item[0]:<15}{item[1]:>5}')
+            print()
+
+        if s.games:
+            print("Games:")
+            for item in s.games:
+                print(f'{item[0]:<15}{item[1]:>5}')
+            print()
