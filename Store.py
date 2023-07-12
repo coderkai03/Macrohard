@@ -22,16 +22,16 @@ class Macrohard:
             subtotal += user.cart[cost][1]
 
         subtax = s.taxRate * subtotal
-        subdiscount = discount * subtotal
+        # subdiscount = discount * subtotal
         subship = s.shipRate * subtotal
         
         total = subtotal + subtax + subship #- subdiscount
 
         print('--- Checkout --------------------------')
         user.display_cart()
+        pad1 = 15
         print('\n')
-        print(f'Subtotal: ${subtotal:.2f}')
-        print(f'Sales tax: ${subtax:.2f}')
-        print(f'Shipping: ${subship:.2f}')
-        print(f'Discount: -${subdiscount:.2f}')
-        print(f'\nTotal: ${total:.2f}')
+        print('{}${:>10.2f}'.format('Subtotal:'.ljust(pad1), subtotal))
+        print('{}${:>10.2f}'.format('Sales tax:'.ljust(pad1), subtax))
+        print('{}${:>10.2f}'.format('Shipping:'.ljust(pad1), subship))
+        print('\n{}${:>10.2f}'.format('Total:'.ljust(pad1), total))

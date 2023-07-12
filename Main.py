@@ -36,4 +36,4 @@ while (True):
     print('\n')
 
 #display cart
-    MH.checkout(cus1)
+MH.checkout(cus1)
