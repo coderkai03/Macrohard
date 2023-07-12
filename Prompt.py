@@ -20,6 +20,7 @@ class Prompt:
         email = input('Email: ')
         ZIP = input('ZIP: ')
         address = input('Address: ')
+
         return {
             'name': name,
             'phone': phone,
@@ -27,3 +28,11 @@ class Prompt:
             'ZIP': ZIP,
             'address': address
         }
+    
+    def get_discount(s):
+        print('I am a:')
+        print('1 - Veteran')
+        print('2 - Senior')
+        print('3 - Student')
+        print()
+        return s.validate_input(1, 3)

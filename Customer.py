@@ -8,17 +8,23 @@ class Profile:
         'address': None
     }
 
-    user_discounts = {
-        'veteran': False,
-        'senior': False,
-        'student': False
+    discount_opts = {
+        'VETERAN': -.08,
+        'SENIOR': -.03,
+        'STUDENT': -.05
     }
+
+    user_discount = []
 
     cart = []
 
     #constructor
-    def __init__(s, info):
+    def __init__(s, info, disc):
         s.user_data.update(info)
+        disckey = list(s.discount_opts.keys())[disc-1]
+        discval = s.discount_opts[disckey]
+        s.user_discount.append(disckey)
+        s.user_discount.append(discval)
 
     #methods
     def __str__(s):

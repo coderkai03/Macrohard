@@ -8,9 +8,10 @@ from Store import Macrohard
 #create prompt
 pt = Prompt()
 uInfo = pt.get_customer_info()
+uDisc = pt.get_discount()
 
 #test create profile
-cus1 = Profile(uInfo)
+cus1 = Profile(uInfo, uDisc)
 
 #test create product list
 plist = Products()
@@ -22,6 +23,7 @@ MH = Macrohard(cus1.user_data['name'])
 #show avail products
 plist.display_products()
 
+print('--- Welcome to Macrohard! -----------------------------------')
 while (True):
     #ask user to add items to cart
     print("Enter an item #: ")
