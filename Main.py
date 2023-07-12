@@ -5,6 +5,8 @@ from Prompt import Prompt
 from Store import Macrohard
 
 
+print('--- Welcome to Macrohard! -----------------------------------')
+
 #create prompt
 pt = Prompt()
 uInfo = pt.get_customer_info()
@@ -23,7 +25,6 @@ MH = Macrohard(cus1.user_data['name'])
 #show avail products
 plist.display_products()
 
-print('--- Welcome to Macrohard! -----------------------------------')
 while (True):
     #ask user to add items to cart
     print("Enter an item #: ")

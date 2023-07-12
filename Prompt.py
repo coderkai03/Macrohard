@@ -3,6 +3,7 @@ class Prompt:
     def validate_input(s, min, max):
         while True:
             try:
+                print('0 - Quit')
                 num = int(input('Input: '))
                 if num >= min and num <= max:
                     return num
@@ -10,7 +11,7 @@ class Prompt:
                     #throw an error to go to the except block
                     raise ValueError
             except ValueError:
-                print('Invalid input. Please try again.')
+                print('Invalid input. Please try again.\n')
 
     #ask user for customer info and return a dictionary
     def get_customer_info(s):
