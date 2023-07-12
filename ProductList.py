@@ -37,9 +37,13 @@ class Products:
     periSize = len(peripherals)
     gameSize = len(games)
 
+    catSize = compSize+periSize+gameSize
+
 
     #function to return one dictionary entry
-    def get_item(s, category, index):
+    def get_item(s, choice):
+        [category, index] = s.numToCategory(choice)
+
         if (category == 'computers'):
             return s.computers[index]
         elif (category == 'peripherals'):
@@ -67,3 +71,15 @@ class Products:
             print(f'{str(prodCount)+")":<4} {item[0]:<50}${item[1]:>10.2f}')
             prodCount+=1
         print()
+
+    def numToCategory(s, num):
+        num-=1
+        cat1 = s.compSize
+        cat2 = s.periSize
+        cat3 = s.gameSize
+        if num < cat1:
+            return ['computers', num]
+        elif num < cat1+cat2:
+            return ['peripherals', num-cat1]
+        elif num < cat1+cat2+cat3:
+            return ['games', num-cat2-cat1]
