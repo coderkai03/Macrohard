@@ -1,26 +1,20 @@
-class Profile:
-    #member variables
-    user_data = {
-        'name': None,
-        'phone': None,
-        'email': None,
-        'ZIP': None,
-        'address': None
-    }
+from Person import Person
 
+class Profile(Person):
+    #member variables
     discount_opts = {
-        'VETERAN': -.08,
-        'SENIOR': -.03,
-        'STUDENT': -.05
+        'VETERAN': -.1,
+        'SENIOR': -.05,
+        'STUDENT': -.08,
+        'NONE': 0
     }
 
     user_discount = []
-
     cart = []
 
     #constructor
     def __init__(s, info, disc):
-        s.user_data.update(info)
+        super().__init__(info)
         disckey = list(s.discount_opts.keys())[disc-1]
         discval = s.discount_opts[disckey]
         s.user_discount.append(disckey)
