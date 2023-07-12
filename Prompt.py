@@ -1,6 +1,6 @@
 class Prompt:
     #validate input to be an integer between min and max
-    def validate_input(min, max):
+    def validate_input(s, min, max):
         while True:
             try:
                 num = int(input('Input: '))
@@ -13,7 +13,7 @@ class Prompt:
                 print('Invalid input. Please try again.')
 
     #ask user for customer info and return a dictionary
-    def get_customer_info():
+    def get_customer_info(s):
         print('Enter the customer\'s information.')
         name = input('Name: ')
         phone = input('Phone: ')

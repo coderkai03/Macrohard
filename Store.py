@@ -15,15 +15,23 @@ class Macrohard:
         print('Quit: 0')
         print('Enter an item #: ')
 
-    def calcBill(s, user: Profile(), discount):
-        userCosts = user.cart.values()
+    def checkout(s, user):
+        cartsize = range(0, len(user.cart))
+        subtotal = 0
+        for cost in cartsize:
+            subtotal += user.cart[cost][1]
 
-        subtotal = sum(list(userCosts))
         subtax = s.taxRate * subtotal
         subdiscount = discount * subtotal
         subship = s.shipRate * subtotal
         
-        total = subtotal + subtax + subship - subdiscount
+        total = subtotal + subtax + subship #- subdiscount
 
         print('--- Checkout --------------------------')
         user.display_cart()
+        print('\n')
+        print(f'Subtotal: ${subtotal:.2f}')
+        print(f'Sales tax: ${subtax:.2f}')
+        print(f'Shipping: ${subship:.2f}')
+        print(f'Discount: -${subdiscount:.2f}')
+        print(f'\nTotal: ${total:.2f}')

@@ -1,17 +1,22 @@
 from Customer import Profile
 from View import View
 from ProductList import Products
+from Prompt import Prompt
+from Store import Macrohard
 
 
+#create prompt
+pt = Prompt()
+uInfo = pt.get_customer_info()
 
 #test create profile
-cus1 = Profile()
+cus1 = Profile(uInfo)
 
 #test create product list
 plist = Products()
 
-#create prompt
-pt = View()
+#store mechanics
+MH = Macrohard(cus1.user_data['name'])
 
 
 #show avail products
@@ -28,6 +33,7 @@ while (True):
     uItem = plist.get_item(uInput)
     cus1.addItem(uItem)
 
-    #display cart
-    cus1.display_cart()
     print('\n')
+
+#display cart
+    MH.checkout(cus1)

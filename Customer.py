@@ -17,12 +17,8 @@ class Profile:
     cart = []
 
     #constructor
-    # def __init__(s, name, phone, email, ZIP, address):
-    #     s.user_data['name'] = name
-    #     s.user_data['phone'] = phone
-    #     s.user_data['email'] = email
-    #     s.user_data['ZIP'] = ZIP
-    #     s.user_data['address'] = address
+    def __init__(s, info):
+        s.user_data.update(info)
 
     #methods
     def __str__(s):
@@ -43,7 +39,6 @@ class Profile:
     def display_cart(s):
         prodCount = 1
 
-        print("Cart:")
         for item in s.cart:
             print(f'{str(prodCount)+")":<4}{item[0]:<50}${item[1]:>10.2f}')
             prodCount+=1
