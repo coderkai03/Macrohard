@@ -21,6 +21,9 @@ plist = Products()
 #store mechanics
 MH = Macrohard(cus1.user_data['name'])
 
+#create view
+view = View()
+
 
 #show avail products
 plist.display_products()
@@ -39,4 +42,11 @@ while (True):
     print('\n')
 
 #display cart
-MH.checkout(cus1)
+MHBill = MH.checkout(cus1)
+cusBill = cus1.export_cart()
+
+view.print_bill(cusBill, MHBill)
+view.export_bill(cusBill, MHBill)
+
+print('\n\nExported bill to Macrohard-Bill.txt')
+print('\n--- Thanks for shopping with Macrohard! ---------------------------------------\n')
