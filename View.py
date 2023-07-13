@@ -1,22 +1,27 @@
 class View:
-
-    #ask user for customer info and return a dictionary
-    def get_customer_info():
-        print('Enter the customer\'s information.')
-        name = input('Name: ')
-        phone = input('Phone: ')
-        email = input('Email: ')
-        ZIP = input('ZIP: ')
-        address = input('Address: ')
-        return {
-            'name': name,
-            'phone': phone,
-            'email': email,
-            'ZIP': ZIP,
-            'address': address
-        }
-    
     #print a list of products
     def print_products(products):
         for i in range(len(products)):
             print(f'{i + 1}. {products[i]}')
+
+    def print_bill(s, cart, bill):
+        print('--- Checkout --------------------------')
+        for l1 in cart:
+            print(l1, end='')
+
+        print('\n')
+
+        for l2 in bill:
+            print(l2, end='')
+
+    def export_bill(s, cart, bill):
+        filename = 'Macrohard-Bill.txt'
+        f = open(filename, 'w')
+        f.write('--- Checkout --------------------------\n')
+        for l1 in cart:
+            f.write(l1)
+
+        f.write('\n\n')
+
+        for l2 in bill:
+            f.write(l2)
