@@ -1,18 +1,42 @@
 from Customer import Profile
 from View import View
+from ProductList import Products
+from Prompt import Prompt
+from Store import Macrohard
 
-#test get_customer_info
-#use return value to create a new Profile object
-c1 = Profile(**View.get_customer_info())
 
-#print customer's info
-print(c1)
+print('--- Welcome to Macrohard! -----------------------------------')
 
-#test validate_input
-print('Enter a number between 1 and 10.')
-num = View.validate_input(1, 10)
-print(f'You entered {num}')
+#create prompt
+pt = Prompt()
+uInfo = pt.get_customer_info()
+uDisc = pt.get_discount()
 
-#add products to cart
-#use return value to add products to cart
-c1.add_to_cart(View.get_products())
+#test create profile
+cus1 = Profile(uInfo, uDisc)
+
+#test create product list
+plist = Products()
+
+#store mechanics
+MH = Macrohard(cus1.user_data['name'])
+
+
+#show avail products
+plist.display_products()
+
+while (True):
+    #ask user to add items to cart
+    print("Enter an item #: ")
+    uInput = pt.validate_input(0, plist.catSize)
+    if not uInput:
+        break
+
+    #add to cart
+    uItem = plist.get_item(uInput)
+    cus1.addItem(uItem)
+
+    print('\n')
+
+#display cart
+MH.checkout(cus1)

@@ -1,28 +1,24 @@
-class Profile:
+from Person import Person
+
+class Profile(Person):
     #member variables
-    user_data = {
-        'name': None,
-        'phone': None,
-        'email': None,
-        'ZIP': None,
-        'address': None
+    discount_opts = {
+        'VETERAN': -.1,
+        'SENIOR': -.05,
+        'STUDENT': -.08,
+        'NONE': 0
     }
 
-    user_discounts = {
-        'veteran': False,
-        'senior': False,
-        'student': False
-    }
-
+    user_discount = []
     cart = []
 
     #constructor
-    def __init__(s, name, phone, email, ZIP, address):
-        s.user_data['name'] = name
-        s.user_data['phone'] = phone
-        s.user_data['email'] = email
-        s.user_data['ZIP'] = ZIP
-        s.user_data['address'] = address
+    def __init__(s, info, disc):
+        super().__init__(info)
+        disckey = list(s.discount_opts.keys())[disc-1]
+        discval = s.discount_opts[disckey]
+        s.user_discount.append(disckey)
+        s.user_discount.append(discval)
 
     #methods
     def __str__(s):
@@ -33,6 +29,16 @@ class Profile:
         ZIP: {s.user_data['ZIP']}
         Address: {s.user_data['address']}
         '''
-    
-    def add_to_cart(s, product):
-        s.cart.append(product)
+
+    def addItem(s, item):
+        s.cart.append(item)
+
+    def removeItem(s, index):
+        s.cart.pop(index)
+
+    def display_cart(s):
+        prodCount = 1
+
+        for item in s.cart:
+            print(f'{str(prodCount)+")":<4}{item[0]:<50}${item[1]:>10.2f}')
+            prodCount+=1
