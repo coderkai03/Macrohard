@@ -11,6 +11,7 @@ class Profile(Person):
 
     user_discount = []
     cart = []
+    cart_bill=[]
 
     #constructor
     def __init__(s, info, disc):
@@ -42,3 +43,12 @@ class Profile(Person):
         for item in s.cart:
             print(f'{str(prodCount)+")":<4}{item[0]:<50}${item[1]:>10.2f}')
             prodCount+=1
+
+    def export_cart(s):
+        prodCount = 1
+
+        for item in s.cart:
+            s.cart_bill.append(f'\n{str(prodCount)+")":<4}{item[0]:<50}${item[1]:>10.2f}')
+            prodCount+=1
+
+        return s.cart_bill

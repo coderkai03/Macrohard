@@ -1,10 +1,13 @@
 from ProductList import *
 from Customer import *
 
+
 class Macrohard:
     allprods = Products()
     taxRate = .0725
     shipRate = .05
+
+    store_bill=[]
 
     def __init__(self, name) -> None:
         self.cname = name
@@ -27,14 +30,12 @@ class Macrohard:
         subship = s.shipRate * subtotal
         
         total = subtotal + subtax + subship + subdiscount
-
-        print('--- Checkout --------------------------')
-        user.display_cart()
+        
         pad1 = 54
-        #pad2 = 10
-        print('\n')
-        print('{}${:>10.2f}'.format('Subtotal:'.ljust(pad1), subtotal))
-        print('{}${:>10.2f}'.format('Sales tax:'.ljust(pad1), subtax))
-        print('{}${:>10.2f}'.format('Shipping:'.ljust(pad1), subship))
-        print('{}${:>10.2f}'.format(disctitle.ljust(pad1), subdiscount))
-        print('\n{}${:>10.2f}'.format('Total:'.ljust(pad1), total))
+        s.store_bill.append('\n{}${:>10.2f}'.format('Subtotal:'.ljust(pad1), subtotal))
+        s.store_bill.append('\n{}${:>10.2f}'.format('Sales tax:'.ljust(pad1), subtax))
+        s.store_bill.append('\n{}${:>10.2f}'.format('Shipping:'.ljust(pad1), subship))
+        s.store_bill.append('\n{}${:>10.2f}'.format(disctitle.ljust(pad1), subdiscount))
+        s.store_bill.append('\n{}${:>10.2f}'.format('Total:'.ljust(pad1), total))
+
+        return s.store_bill
