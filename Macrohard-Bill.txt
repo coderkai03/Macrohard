@@ -1,13 +1,13 @@
 --- Checkout --------------------------
 
-1)  Spiderman: Miles Morales                          $     60.00
-2)  HP 24mh FHD Monitor                               $    200.00
-3)  Microsoft Surface Pro 7                           $    800.00
-4)  Razer DeathAdder Elite Gaming Mouse               $     50.00
+1)  Minecraft                                         $     30.00
+2)  MacBook Pro                                       $   2000.00
+3)  Apple Magic Keyboard                              $    100.00
+4)  Apple Magic Mouse 2                               $    100.00
 
 
-Subtotal:                                             $   1110.00
-Sales tax:                                            $     80.47
-Shipping:                                             $     55.50
-Discount (STUDENT):                                   $    -88.80
-Total:                                                $   1157.17
+Subtotal:                                             $   2230.00
+Sales tax:                                            $    161.67
+Shipping:                                             $    111.50
+Discount (STUDENT):                                   $   -178.40
+Total:                                                $   2324.78
