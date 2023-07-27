@@ -8,9 +8,7 @@ store = Macrohard('Rian')
 root = Tk()
 root.title('Macrohard')
 
-print(1 if 'Space Mono' in tkFont.families() else 0)
-
-root.geometry('800x600')
+# root.pack()
 
 # welcome = Label(items1, text='Welcome to Macrohard!')
 # welcome.pack()
@@ -73,14 +71,58 @@ def buildCatalog(frame, products):
         'Quant vars': quant_vars
         }
 
+def hideCatalogs(frame, r, c):
+    frame1, frame2 = Frame(), Frame()
+    for c in catalog_frames.keys():
+        if c != frame:
+            catalog_frames[c].grid_forget()
+    catalog_frames[frame].grid(row=r, column=c)
+# def showCatalog(frame, var):
+#     children = frame.children
+#     for child in children:
+#         if child
+
+''' Store catalog window'''
+store_catalogs_menu = Frame(root)
+
+computer_frame = Frame(store_catalogs_menu).grid(row=0, column=0)
+peripheral_frame = Frame(store_catalogs_menu).grid(row=0, column=1)
+game_frame = Frame(store_catalogs_menu).grid(row=0, column=2)
+
+catalog_frames = {
+    'Computers': computer_frame,
+    'Peripherals': peripheral_frame,
+    'Games': game_frame
+}
 
 ''' Prepare Computers Catalog '''
-computer_frame = Frame(root)
-computer_frame.pack()
 computers = store.allprods.computers
 comp_assets = buildCatalog(computer_frame, computers)
+comp_frame_button = Button(
+    computer_frame,
+    text='Computers',
+    command=lambda x='Computers': hideCatalogs(x, 0, 0)
+).grid()
 
-# for i in range(len(comps)):
-#     computer_frame.grid_rowconfigure(i, minsize=comp_prods[i].winfo_reqheight())
+''' Prepare Peripherals Catalog '''
+peripherals = store.allprods.peripherals
+perip_assets = buildCatalog(peripheral_frame, peripherals)
+perip_frame_button = Button(
+    peripheral_frame,
+    text='Peripherals',
+    command=lambda x='Peripherals': hideCatalogs(x, 0, 1)
+).grid()
+
+''' Prepare Games Catalog '''
+games = store.allprods.games
+game_assets = buildCatalog(game_frame, games)
+game_frame_button = Button(
+    game_frame,
+    text='Games',
+    command=lambda x='Games': hideCatalogs(x, 0, 2)
+).grid()
+
+print(store_catalogs_menu.children)
+
 
 root.mainloop()
