@@ -5,5 +5,5 @@ class Person():
         'address': None
     }
 
-    def __init__(s, perInfo) -> None:
-        s.user_data.update(perInfo)
+    # def __init__(s, perInfo) -> None:
+    #     s.user_data.update(perInfo)
