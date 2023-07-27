@@ -52,9 +52,20 @@ class Macrohard:
             ).grid(row=r, column=c)
     
     def hideCatalogs(s, frame, catalog_frames):
-        print(f'Showing {frame} catalog')
+        print(f'Showing {frame, catalog_frames}')
         for cat in catalog_frames:
             if cat != frame:
                 catalog_frames[cat].grid_forget()
+                print(f'Forgot {cat}!')
                 # mid_prog=True
         catalog_frames[frame].grid()
+        print(f'Rendered {frame}!')
+
+    def buildCatAssets(s, root_frame, frame, cat_frames, col, label):
+        menu = s.allprods.buildCatalog(frame, s.allprods.categories[label], col)
+        frame_button = s.createMenuBtn(root_frame, cat_frames, label, 0, col)
+        return {
+            'Products': s.allprods.categories[label],
+            'Menu': menu,
+            'MenuButton': frame_button
+        }

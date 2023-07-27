@@ -36,6 +36,12 @@ class ProductList:
         ["Minecraft", 30]
     ]
 
+    categories = {
+        'Computers': computers,
+        'Peripherals': peripherals,
+        'Games': games
+    }
+
     compSize = len(computers)
     periSize = len(peripherals)
     gameSize = len(games)
