@@ -93,8 +93,12 @@ class Customer(Person):
                 }
         }
     
-    def saveData(s, save_name, save_address):
+    def saveData(s, roots, save_name, save_address):
+        roots['AccountLogin'].pack_forget()
+        roots['StoreWindow'].grid()
+
         s.name = save_name
         s.address = save_address
+        
         print('Name: ', s.name)
         print('Address: ', s.address)

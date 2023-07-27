@@ -15,11 +15,14 @@ root = Tk()
 root.title('Macrohard')
 root.geometry('600x400')
 
-''' Account login window'''
-account_login_window = Frame(root) #login screen
-account_login_window.pack(anchor='center')
+app_screens = dict()
+app_screens['AccountLogin'] = Frame(root) #login screen
+app_screens['StoreWindow'] = Frame(root) #store screen
 
-account_login = Frame(account_login_window)
+''' Account login window'''
+app_screens['AccountLogin'].pack(anchor='center')
+
+account_login = Frame(app_screens['AccountLogin'])
 account_login.grid()
 
 greeting = Label(account_login, text='Welcome to Macrohard!')
@@ -33,8 +36,9 @@ submit_info = Button(
     account_login,
     text='Submit',
     command= lambda: CSTMR.saveData(
+        app_screens,
         login_assets['Name'].get(), 
-        login_assets['Address'].get()
+        login_assets['Address'].get(),
     )
 )
 submit_info.grid()
@@ -42,13 +46,13 @@ submit_info.grid()
 ''' Store catalog window'''
 
 #Store frames
-store_window = Frame(root)
-#store_window.grid()
+#app_screens['StoreWindow'] = Frame(root)
+#app_screens['StoreWindow'].grid()
 
-store_catalogs = Frame(store_window)
+store_catalogs = Frame(app_screens['StoreWindow'])
 store_catalogs.grid(row=2, column=0)
 
-store_menu = Frame(store_window)
+store_menu = Frame(app_screens['StoreWindow'])
 store_menu.grid(row=1, column=0, sticky='w')
 
 #Catalog frames
