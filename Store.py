@@ -1,9 +1,9 @@
 from ProductList import *
 from Customer import *
-
+from tkinter import *
 
 class Macrohard:
-    allprods = Products()
+    allprods = ProductList()
     taxRate = .0725
     shipRate = .05
 
@@ -11,6 +11,8 @@ class Macrohard:
 
     def __init__(self, name) -> None:
         self.cname = name
+
+    ''' BACKEND FUNCS '''
 
     def showCatalog(s):
         print('--- Macrohard -------------------------')
@@ -39,3 +41,20 @@ class Macrohard:
         s.store_bill.append('\n{}${:>10.2f}'.format('Total:'.ljust(pad1), total))
 
         return s.store_bill
+    
+    ''' UI FUNCS '''
+
+    def createMenuBtn(s, store_menu, cat_frames, label, r, c):
+        return Button(
+                store_menu,
+                text=label,
+                command=lambda x=label: s.hideCatalogs(x, cat_frames)
+            ).grid(row=r, column=c)
+    
+    def hideCatalogs(s, frame, catalog_frames):
+        print(f'Showing {frame} catalog')
+        for cat in catalog_frames:
+            if cat != frame:
+                catalog_frames[cat].grid_forget()
+                # mid_prog=True
+        catalog_frames[frame].grid()
