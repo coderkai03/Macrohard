@@ -72,11 +72,11 @@ def buildCatalog(frame, products, col):
         }
 
 def hideCatalogs(frame, r, c):
-    print(f'Hiding {frame} catalog')
+    print(f'Showing {frame} catalog')
     for cat in catalog_frames:
-        print(f'Viewing {catalog_frames[cat]}...')
         if cat != frame:
             catalog_frames[cat].grid_forget()
+            # mid_prog=True
     catalog_frames[frame].grid()
 
 def createMenuBtn(label, r, c):
@@ -98,6 +98,7 @@ store_catalogs.grid(row=2, column=0)
 store_menu = Frame(root)
 store_menu.grid(row=1, column=0)
 
+''' Catalog frames '''
 computer_frame = Frame(store_catalogs)
 computer_frame.grid(row=0, column=0)
 
@@ -112,6 +113,9 @@ catalog_frames = {
     'Peripherals': peripheral_frame,
     'Games': game_frame
 }
+
+catalog_frames['Peripherals'].grid_forget()
+catalog_frames['Games'].grid_forget()
 
 ''' Prepare Computers Catalog '''
 computers = store.allprods.computers
