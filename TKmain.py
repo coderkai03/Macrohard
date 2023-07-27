@@ -30,7 +30,7 @@ def showIncrementItem(item, prod_idx, quant, quant_idx):
         quant_idx[idx].set(0)
 
 #create catalog widgets
-def buildCatalog(frame, products):
+def buildCatalog(frame, products, col):
     prod_buttons = []
     prod_vars = []
 
@@ -59,8 +59,8 @@ def buildCatalog(frame, products):
             width=3
         ))
 
-        quant_entries[r].grid(row=r, column=1, sticky='w')
-        prod_buttons[r].grid(row=r, column=0, sticky='w')
+        quant_entries[r].grid(row=r, column=col+1, sticky='w')
+        prod_buttons[r].grid(row=r, column=col, sticky='w')
         prod_buttons[r].configure(command=lambda item=prod_vars[r]: showIncrementItem(item, prod_vars, quant_entries, quant_vars))
         r+=1
 
@@ -72,22 +72,40 @@ def buildCatalog(frame, products):
         }
 
 def hideCatalogs(frame, r, c):
-    frame1, frame2 = Frame(), Frame()
-    for c in catalog_frames.keys():
-        if c != frame:
-            catalog_frames[c].grid_forget()
-    catalog_frames[frame].grid(row=r, column=c)
+    print(f'Hiding {frame} catalog')
+    for cat in catalog_frames:
+        print(f'Viewing {catalog_frames[cat]}...')
+        if cat != frame:
+            catalog_frames[cat].grid_forget()
+    catalog_frames[frame].grid()
+
+def createMenuBtn(label, r, c):
+    return Button(
+            store_menu,
+            text=label,
+            command=lambda x=label: hideCatalogs(x, r, c)
+        ).grid(row=r, column=c)
+
 # def showCatalog(frame, var):
 #     children = frame.children
 #     for child in children:
 #         if child
 
 ''' Store catalog window'''
-store_catalogs_menu = Frame(root)
+store_catalogs = Frame(root)
+store_catalogs.grid(row=2, column=0)
 
-computer_frame = Frame(store_catalogs_menu).grid(row=0, column=0)
-peripheral_frame = Frame(store_catalogs_menu).grid(row=0, column=1)
-game_frame = Frame(store_catalogs_menu).grid(row=0, column=2)
+store_menu = Frame(root)
+store_menu.grid(row=1, column=0)
+
+computer_frame = Frame(store_catalogs)
+computer_frame.grid(row=0, column=0)
+
+peripheral_frame = Frame(store_catalogs)
+peripheral_frame.grid(row=0, column=1)
+
+game_frame = Frame(store_catalogs)
+game_frame.grid(row=0, column=2)
 
 catalog_frames = {
     'Computers': computer_frame,
@@ -97,32 +115,19 @@ catalog_frames = {
 
 ''' Prepare Computers Catalog '''
 computers = store.allprods.computers
-comp_assets = buildCatalog(computer_frame, computers)
-comp_frame_button = Button(
-    computer_frame,
-    text='Computers',
-    command=lambda x='Computers': hideCatalogs(x, 0, 0)
-).grid()
+comp_assets = buildCatalog(computer_frame, computers, 0)
+comp_frame_button = createMenuBtn('Computers', 0, 0)
 
 ''' Prepare Peripherals Catalog '''
 peripherals = store.allprods.peripherals
-perip_assets = buildCatalog(peripheral_frame, peripherals)
-perip_frame_button = Button(
-    peripheral_frame,
-    text='Peripherals',
-    command=lambda x='Peripherals': hideCatalogs(x, 0, 1)
-).grid()
+perip_assets = buildCatalog(peripheral_frame, peripherals, 1)
+perip_frame_button = createMenuBtn('Peripherals', 0, 1)
 
 ''' Prepare Games Catalog '''
 games = store.allprods.games
-game_assets = buildCatalog(game_frame, games)
-game_frame_button = Button(
-    game_frame,
-    text='Games',
-    command=lambda x='Games': hideCatalogs(x, 0, 2)
-).grid()
+game_assets = buildCatalog(game_frame, games, 2)
+game_frame_button = createMenuBtn('Games', 0, 2)
 
-print(store_catalogs_menu.children)
 
 
 root.mainloop()
