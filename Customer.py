@@ -61,6 +61,7 @@ class Customer(Person):
 
     def userInfoEntries(s, root):
         entry_vars = [StringVar() for _ in range(3)]
+        entry_vars[2] = StringVar(value=0) #set radio buttons to 0
 
         name_label = Label(root, text='Name: ')
         name_label.grid(row=1, column=0)
