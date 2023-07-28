@@ -39,6 +39,7 @@ submit_info = Button(
         app_screens,
         login_assets['Name'].get(), 
         login_assets['Address'].get(),
+        login_assets['Demographics']['Var'].get()
     )
 )
 submit_info.grid()

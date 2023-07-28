@@ -5,6 +5,7 @@ class Customer(Person):
     #member variables
     name = None
     address = None
+    user_discount = None
 
     discount_opts = {
         'VETERAN': -.1,
@@ -13,7 +14,6 @@ class Customer(Person):
         'NONE': 0
     }
 
-    user_discount = []
     cart = []
     cart_bill=[]
 
@@ -93,12 +93,14 @@ class Customer(Person):
                 }
         }
     
-    def saveData(s, roots, save_name, save_address):
+    def saveData(s, roots, save_name, save_address, save_discount):
         roots['AccountLogin'].pack_forget()
         roots['StoreWindow'].grid()
 
         s.name = save_name
         s.address = save_address
-        
+        s.user_discount = s.discount_opts[save_discount.upper()]
+
         print('Name: ', s.name)
         print('Address: ', s.address)
+        print('Discount: ', s.user_discount)
