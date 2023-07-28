@@ -1,5 +1,4 @@
 from tkinter import *
-import tkinter.font as tkFont
 from Customer import Customer
 from View import View
 from ProductList import ProductList
@@ -13,20 +12,20 @@ CSTMR = Customer()
 
 root = Tk()
 root.title('Macrohard')
-root.geometry('600x400')
+#root.pack()
 
 app_screens = dict()
 app_screens['AccountLogin'] = Frame(root) #login screen
 app_screens['StoreWindow'] = Frame(root) #store screen
 
 ''' Account login window'''
-app_screens['AccountLogin'].pack(anchor='center')
+app_screens['AccountLogin'].pack(anchor='center', padx=100, pady=30)
 
 account_login = Frame(app_screens['AccountLogin'])
 account_login.grid()
 
 greeting = Label(account_login, text='Welcome to Macrohard!')
-greeting.grid(row=0, column=0)
+greeting.grid(row=0, column=0, pady=20)
 
 #enter user info
 login_assets = CSTMR.userInfoEntries(account_login)
@@ -86,8 +85,13 @@ for cat in catalog_assets:
                                                catalog_frames,
                                                columns,
                                                cat)
-    #print(f'\n\n{cat} Created: ', catalog_assets[cat])
+    #catalog_assets: checkbox/entry vars
+    #checkbox (prod name): catalog_assets['Computers']['Menu']['ProdVars'] = 0/1
+    #entry (prod quant): catalog_assets['Computers']['Menu']['QuantVars'] = 0<num
     columns+=1
+
+#add to customer cart
+comp_cart = {}
 
 #Show Computers, hide Peripherals, Games
 catalog_frames['Peripherals'].grid_forget()

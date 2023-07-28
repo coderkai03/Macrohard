@@ -96,7 +96,7 @@ class ProductList:
         
     ''' UI FUNCS '''
 
-    def showIncrementItem(item, prod_idx, quant, quant_idx):
+    def showIncrementItem(s, item, prod_idx, quant, quant_idx):
         idx = prod_idx.index(item)
         #print(f'{idx} found')
         if item.get():
@@ -141,8 +141,8 @@ class ProductList:
             r+=1
 
         return {
-            'Prod Buttons': prod_buttons,
-            'Prod Vars': prod_vars,
-            'Quant Entries': quant_entries,
-            'Quant vars': quant_vars
+            'ProdButtons': prod_buttons,
+            'ProdVars': prod_vars,
+            'QuantEntries': quant_entries,
+            'QuantVars': quant_vars
             }

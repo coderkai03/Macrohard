@@ -65,7 +65,7 @@ class Macrohard:
         menu = s.allprods.buildCatalog(frame, s.allprods.categories[label], col)
         frame_button = s.createMenuBtn(root_frame, cat_frames, label, 0, col)
         return {
-            'Products': s.allprods.categories[label],
+            #'Products': s.allprods.categories[label],
             'Menu': menu,
             'MenuButton': frame_button
         }

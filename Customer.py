@@ -75,6 +75,8 @@ class Customer(Person):
         address_entry = Entry(root, textvariable=entry_vars[1])
         address_entry.grid(row=2, column=1)
 
+        demog_label = Label(root, text='Apply discount:')
+        demog_label.grid(row=3, column=0)
         demog_radio = dict()
         demog_radio['Student'] = Radiobutton(root, text='Student', variable=entry_vars[2], value='Student')
         demog_radio['Veteran'] = Radiobutton(root, text='Veteran', variable=entry_vars[2], value='Veteran')
@@ -82,7 +84,7 @@ class Customer(Person):
         
         r=3
         for radio in demog_radio.values():
-            radio.grid(row=r, column=0)
+            radio.grid(row=r, column=1)
             r+=1
 
         return {
@@ -96,7 +98,7 @@ class Customer(Person):
     
     def saveData(s, roots, save_name, save_address, save_discount):
         roots['AccountLogin'].pack_forget()
-        roots['StoreWindow'].grid()
+        roots['StoreWindow'].pack(anchor='center', padx=200, pady=50)
 
         s.name = save_name
         s.address = save_address
@@ -105,3 +107,5 @@ class Customer(Person):
         print('Name: ', s.name)
         print('Address: ', s.address)
         print('Discount: ', s.user_discount)
+
+    def addToCart(s, ):
