@@ -14,8 +14,8 @@ class Customer(Person):
         'NONE': 0
     }
 
-    cart = []
-    cart_bill=[]
+    cart = {} #items - prices
+    cart_bill={} #subtotals -> grandtotal
 
     #constructor
     # def __init__(s, info, disc):
@@ -107,5 +107,3 @@ class Customer(Person):
         print('Name: ', s.name)
         print('Address: ', s.address)
         print('Discount: ', s.user_discount)
-
-    def addToCart(s, ):

@@ -65,7 +65,50 @@ class Macrohard:
         menu = s.allprods.buildCatalog(frame, s.allprods.categories[label], col)
         frame_button = s.createMenuBtn(root_frame, cat_frames, label, 0, col)
         return {
-            #'Products': s.allprods.categories[label],
             'Menu': menu,
             'MenuButton': frame_button
         }
+    
+    def createCartEntry(s, cat, var, cat_vars):
+        prod_idx = cat_vars['Items'].index(var) # gets the item name index
+        quant = cat_vars['Quantity'][prod_idx].get() # gets the quantity
+        return [
+            s.allprods.categories[cat][prod_idx][0],
+            quant
+        ]
+    
+    def addToCart(s, customer, comp_vars, perip_vars, games_vars):
+        comp_items={}
+        print('\n\nComputer cart:')
+        for var in comp_vars['Items']:
+            if var.get(): # box checked?
+                if comp_vars['Quantity'][comp_vars['Items'].index(var)].get(): # quant>0?
+                    itemName, quantity = s.createCartEntry('Computers', var, comp_vars)
+                    comp_items[itemName] = quantity # adds dict item to cart
+                    print(f'{itemName}: {quantity}')
+
+        perip_items={}
+        print('\n\nPeripheral cart:')
+        for var in perip_vars['Items']:
+            if var.get(): # box checked?
+                if perip_vars['Quantity'][perip_vars['Items'].index(var)].get(): # quant>0?
+                    itemName, quantity = s.createCartEntry('Peripherals', var, perip_vars)
+                    perip_items[itemName] = quantity # adds dict item to cart
+                    print(f'{itemName}: {quantity}')
+
+        games_items={}
+        print('\n\nGames cart:')
+        for var in games_vars['Items']:
+            if var.get(): # box checked?
+                if games_vars['Quantity'][games_vars['Items'].index(var)].get(): # quant>0?
+                    itemName, quantity = s.createCartEntry('Games', var, games_vars)
+                    games_items[itemName] = quantity # adds dict item to cart
+                    print(f'{itemName}: {quantity}')
+
+        # # finally, assign all carts to CSTMR cart
+        # customer.cart.extend(comp_items)
+        # customer.cart.extend(perip_items)
+        # customer.cart.extend(games_items)
+
+        # # test cart display
+        # customer.

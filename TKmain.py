@@ -6,7 +6,7 @@ from Prompt import Prompt
 from Store import Macrohard
 
 ''' Module assets '''
-store = Macrohard('Rian')
+MH = Macrohard('Rian')
 PL = ProductList()
 CSTMR = Customer()
 
@@ -80,18 +80,43 @@ catalog_assets = {
 
 columns=0
 for cat in catalog_assets:
-    catalog_assets[cat] = store.buildCatAssets(store_menu,
+    catalog_assets[cat] = MH.buildCatAssets(store_menu,
                                                catalog_frames[cat],
                                                catalog_frames,
                                                columns,
                                                cat)
-    #catalog_assets: checkbox/entry vars
-    #checkbox (prod name): catalog_assets['Computers']['Menu']['ProdVars'] = 0/1
-    #entry (prod quant): catalog_assets['Computers']['Menu']['QuantVars'] = 0<num
+    # catalog_assets:
+    # 'Computers'
+    # 'Peripherals'
+    # 'Games'
+
+    # catalog_assets: checkbox/entry vars
+    # checkbox (prod name): catalog_assets['Computers']['Menu']['ProdVars'] = 0/1
+    # entry (prod quant): catalog_assets['Computers']['Menu']['QuantVars'] = 0<num
     columns+=1
 
 #add to customer cart
-comp_cart = {}
+comp_cart = {
+    'Items': catalog_assets['Computers']['Menu']['ProdVars'],
+    'Quantity': catalog_assets['Computers']['Menu']['QuantVars']
+}
+
+perip_cart = {
+    'Items': catalog_assets['Peripherals']['Menu']['ProdVars'],
+    'Quantity': catalog_assets['Peripherals']['Menu']['QuantVars']
+}
+
+games_cart = {
+    'Items': catalog_assets['Games']['Menu']['ProdVars'],
+    'Quantity': catalog_assets['Games']['Menu']['QuantVars']
+}
+
+add_cart_button = Button(
+    app_screens['StoreWindow'],
+    text='Add to cart',
+    command=lambda: MH.addToCart(CSTMR, comp_cart, perip_cart, games_cart)
+)
+add_cart_button.grid()
 
 #Show Computers, hide Peripherals, Games
 catalog_frames['Peripherals'].grid_forget()
