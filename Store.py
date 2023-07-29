@@ -105,10 +105,10 @@ class Macrohard:
                     games_items[itemName] = quantity # adds dict item to cart
                     print(f'{itemName}: {quantity}')
 
-        # # finally, assign all carts to CSTMR cart
-        # customer.cart.extend(comp_items)
-        # customer.cart.extend(perip_items)
-        # customer.cart.extend(games_items)
+        # finally, assign all carts to CSTMR cart
+        customer.cart.update(comp_items)
+        customer.cart.update(perip_items)
+        customer.cart.update(games_items)
 
-        # # test cart display
-        # customer.
+        # test cart display
+        customer.display_cart()

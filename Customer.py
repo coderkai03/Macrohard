@@ -45,7 +45,7 @@ class Customer(Person):
         prodCount = 1
 
         for item in s.cart:
-            print(f'{str(prodCount)+")":<4}{item[0]:<50}${item[1]:>10.2f}')
+            print(f'{str(prodCount)+")":<4}{item:<50}${s.cart[item]:>10.2f}')
             prodCount+=1
 
     def export_cart(s):
