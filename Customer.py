@@ -1,7 +1,12 @@
 from Person import Person
+from tkinter import *
 
-class Profile(Person):
+class Customer(Person):
     #member variables
+    name = None
+    address = None
+    user_discount = None
+
     discount_opts = {
         'VETERAN': -.1,
         'SENIOR': -.05,
@@ -9,19 +14,18 @@ class Profile(Person):
         'NONE': 0
     }
 
-    user_discount = []
-    cart = []
-    cart_bill=[]
+    cart = {} #items - prices
+    cart_bill={} #subtotals -> grandtotal
 
     #constructor
-    def __init__(s, info, disc):
-        super().__init__(info)
-        disckey = list(s.discount_opts.keys())[disc-1]
-        discval = s.discount_opts[disckey]
-        s.user_discount.append(disckey)
-        s.user_discount.append(discval)
+    # def __init__(s, info, disc):
+    #     super().__init__(info)
+    #     disckey = list(s.discount_opts.keys())[disc-1]
+    #     discval = s.discount_opts[disckey]
+    #     s.user_discount.append(disckey)
+    #     s.user_discount.append(discval)
 
-    #methods
+    ''' BACKEND FUNCS '''
     def __str__(s):
         return f'''
         Name: {s.user_data['name']}
@@ -41,7 +45,7 @@ class Profile(Person):
         prodCount = 1
 
         for item in s.cart:
-            print(f'{str(prodCount)+")":<4}{item[0]:<50}${item[1]:>10.2f}')
+            print(f'{str(prodCount)+")":<4}{item:<50}${s.cart[item]:>10.2f}')
             prodCount+=1
 
     def export_cart(s):
@@ -52,3 +56,54 @@ class Profile(Person):
             prodCount+=1
 
         return s.cart_bill
+    
+    ''' UI FUNCS '''
+
+    def userInfoEntries(s, root):
+        entry_vars = [StringVar() for _ in range(3)]
+        entry_vars[2] = StringVar(value=0) #set radio buttons to 0
+
+        name_label = Label(root, text='Name: ')
+        name_label.grid(row=1, column=0)
+
+        name_entry = Entry(root, textvariable=entry_vars[0])
+        name_entry.grid(row=1, column=1)
+
+        address_label = Label(root, text='Address: ')
+        address_label.grid(row=2, column=0)
+
+        address_entry = Entry(root, textvariable=entry_vars[1])
+        address_entry.grid(row=2, column=1)
+
+        demog_label = Label(root, text='Apply discount:')
+        demog_label.grid(row=3, column=0)
+        demog_radio = dict()
+        demog_radio['Student'] = Radiobutton(root, text='Student', variable=entry_vars[2], value='Student')
+        demog_radio['Veteran'] = Radiobutton(root, text='Veteran', variable=entry_vars[2], value='Veteran')
+        demog_radio['Senior'] = Radiobutton(root, text='Senior', variable=entry_vars[2], value='Senior')
+        
+        r=3
+        for radio in demog_radio.values():
+            radio.grid(row=r, column=1)
+            r+=1
+
+        return {
+            'Name': name_entry,
+            'Address': address_entry,
+            'Demographics': {
+                'Radio': demog_radio,
+                'Var': entry_vars[2]
+                }
+        }
+    
+    def saveData(s, roots, save_name, save_address, save_discount):
+        roots['AccountLogin'].pack_forget()
+        roots['StoreWindow'].pack(anchor='center', padx=200, pady=50)
+
+        s.name = save_name
+        s.address = save_address
+        s.user_discount = s.discount_opts[save_discount.upper()]
+
+        print('Name: ', s.name)
+        print('Address: ', s.address)
+        print('Discount: ', s.user_discount)
