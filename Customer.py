@@ -97,12 +97,17 @@ class Customer(Person):
         }
     
     def saveData(s, roots, screens, save_name, save_address, save_discount):
-        roots['AccountLogin'].pack_forget()
-        roots['StoreWindow'].pack(anchor='center', padx=200, pady=50)
+        if roots['AccountLogin'].winfo_ismapped():
+            roots['AccountLogin'].pack_forget()
+        
+        if not roots['StoreWindow'].winfo_ismapped():
+            roots['StoreWindow'].pack(anchor='center', padx=200, pady=50)
         
         for scr in screens:
             if scr != 'Store':
                 screens[scr].grid_forget()
+
+        screens['Store'].grid(row=2, column=1)
 
         s.name = save_name
         s.address = save_address

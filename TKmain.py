@@ -37,6 +37,7 @@ store_screens['Checkout'].grid(row=2, column=1)
 
 
 ''' Store sections'''
+
 def hideBtn(targ):    
     for s in switch_store_sections:
         if s != targ:
@@ -81,13 +82,13 @@ login_assets = CSTMR.userInfoEntries(account_login)
 submit_info = Button(
     account_login,
     text='Submit',
-    command= lambda: CSTMR.saveData(
+    command= lambda: [CSTMR.saveData(
         app_screens,
         store_screens,
         login_assets['Name'].get(), 
         login_assets['Address'].get(),
         login_assets['Demographics']['Var'].get()
-    )
+    ), updateNameDisplay()]
 )
 submit_info.grid()
 
@@ -101,12 +102,13 @@ edit_account = CSTMR.userInfoEntries(store_screens['Account'])
 submit_edits = Button(
     store_screens['Account'],
     text='Submit',
-    command= lambda: CSTMR.saveData(
+    command= lambda: [CSTMR.saveData(
+        app_screens,
         store_screens,
-        login_assets['Name'].get(), 
-        login_assets['Address'].get(),
-        login_assets['Demographics']['Var'].get()
-    )
+        edit_account['Name'].get(), 
+        edit_account['Address'].get(),
+        edit_account['Demographics']['Var'].get()
+    ), updateNameDisplay()]
 )
 submit_edits.grid()
 
@@ -117,19 +119,27 @@ submit_edits.grid()
 store = Frame(store_screens['Store'])
 store.grid()
 
+#display user name
+name_label = Label(store)
+name_label.grid()
+
+def updateNameDisplay():
+    inText = 'Hello, '+str(CSTMR.name)+'!\nDeliver to: '+str(CSTMR.address)
+    name_label.config(pady=20, text=inText)
+
 #Comps, Perips, Games sections
 store_menu = Frame(store)
-store_menu.grid(row=0, column=0, sticky='w')
+store_menu.grid(row=1, column=0, sticky='w')
 
 #Catalog frames
 computer_frame = Frame(store)
-computer_frame.grid(row=1, column=0)
+computer_frame.grid(row=2, column=0)
 
 peripheral_frame = Frame(store)
-peripheral_frame.grid(row=1, column=0)
+peripheral_frame.grid(row=2, column=0)
 
 game_frame = Frame(store)
-game_frame.grid(row=1, column=0)
+game_frame.grid(row=2, column=0)
 
 #Create catalog assets
 catalog_frames = {

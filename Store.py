@@ -48,17 +48,17 @@ class Macrohard:
         return Button(
                 store_menu,
                 text=label,
-                command=lambda x=label: s.hideCatalogs(x, cat_frames, 1, 0)
+                command=lambda x=label: s.hideCatalogs(x, cat_frames)
             ).grid(row=0, column=c)
     
-    def hideCatalogs(s, frame, catalog_frames, r, c):
+    def hideCatalogs(s, frame, catalog_frames):
         print(f'Showing {frame, catalog_frames}')
         for cat in catalog_frames:
             if cat != frame:
                 catalog_frames[cat].grid_forget()
                 print(f'Forgot {cat}!')
                 # mid_prog=True
-        catalog_frames[frame].grid(row=r, column=c)
+        catalog_frames[frame].grid(row=2, column=0)
         print(f'Rendered {frame}!')
 
     def buildCatAssets(s, root_frame, frame, cat_frames, col, label):
