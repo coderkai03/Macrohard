@@ -97,7 +97,7 @@ def updateNameDisplay():
     name_label.config(pady=20, text=inText)
 
     inText = str(CSTMR.name)+'\'s cart'
-    cart_name_label.config(pady=20, text=inText)
+    customer_label.config(pady=20, text=inText)
 
 
 ''' Store '''
