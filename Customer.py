@@ -1,5 +1,6 @@
 from Person import Person
 from tkinter import *
+import tkinter.font as tkFont
 
 class Customer(Person):
     #member variables
@@ -14,7 +15,7 @@ class Customer(Person):
         'NONE': 0
     }
 
-    cart = {} #items - prices
+    cart = {} #items - quant
     cart_bill={} #subtotals -> grandtotal
 
     #constructor
@@ -116,3 +117,18 @@ class Customer(Person):
         print('Name: ', s.name)
         print('Address: ', s.address)
         print('Discount: ', s.user_discount)
+
+    def buildCartLbls(s, cat, frame):
+        show_cat = []
+        
+        r=0
+
+        for item in s.cart[cat]:
+            show_cat.append(Label(
+                frame,
+                font=tkFont.Font(family='Space Mono', size=10),
+                text=f'{item:<30}{s.cart[cat][item]:>10.0f}'
+            ))
+
+            show_cat[r].grid(row=r+1, column=0, sticky='w')
+            r+=1

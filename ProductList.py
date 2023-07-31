@@ -101,6 +101,7 @@ class ProductList:
         #print(f'{idx} found')
         if item.get():
             quant[idx].configure(state='normal')
+            quant_idx[idx].set(1)
         else:
             quant[idx].configure(state='disabled')
             quant_idx[idx].set(0)

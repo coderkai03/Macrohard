@@ -92,25 +92,12 @@ submit_info = Button(
 )
 submit_info.grid()
 
+def updateNameDisplay():
+    inText = 'Hello, '+str(CSTMR.name)+'!\nDeliver to: '+str(CSTMR.address)
+    name_label.config(pady=20, text=inText)
 
-''' Account '''
-acc_det_label = Label(store_screens['Account'], text='Account Details')
-acc_det_label.grid(pady=20)
-
-edit_account = CSTMR.userInfoEntries(store_screens['Account'])
-
-submit_edits = Button(
-    store_screens['Account'],
-    text='Submit',
-    command= lambda: [CSTMR.saveData(
-        app_screens,
-        store_screens,
-        edit_account['Name'].get(), 
-        edit_account['Address'].get(),
-        edit_account['Demographics']['Var'].get()
-    ), updateNameDisplay()]
-)
-submit_edits.grid()
+    inText = str(CSTMR.name)+'\'s cart'
+    cart_name_label.config(pady=20, text=inText)
 
 
 ''' Store '''
@@ -122,10 +109,6 @@ store.grid()
 #display user name
 name_label = Label(store)
 name_label.grid()
-
-def updateNameDisplay():
-    inText = 'Hello, '+str(CSTMR.name)+'!\nDeliver to: '+str(CSTMR.address)
-    name_label.config(pady=20, text=inText)
 
 #Comps, Perips, Games sections
 store_menu = Frame(store)
@@ -187,24 +170,79 @@ games_cart = {
 add_cart_button = Button(
     store,
     text='Add to cart',
-    command=lambda: MH.addToCart(CSTMR, comp_cart, perip_cart, games_cart)
+    command=lambda: [MH.addToCart(CSTMR, comp_cart, perip_cart, games_cart),
+                    updateCarts()]
 )
 add_cart_button.grid(row=3, column=0)
+
+def updateCarts():
+    comp_items = CSTMR.buildCartLbls('Computers', comp_cart_display)
+    perip_items = CSTMR.buildCartLbls('Peripherals', perip_cart_display)
+    game_items = CSTMR.buildCartLbls('Games', game_cart_display)
 
 #Show Computers, hide Peripherals, Games
 catalog_frames['Peripherals'].grid_forget()
 catalog_frames['Games'].grid_forget()
 
 
+''' Account '''
+acc_det_label = Label(store_screens['Account'], text='Account Details')
+acc_det_label.grid(pady=20)
+
+edit_account = CSTMR.userInfoEntries(store_screens['Account'])
+
+submit_edits = Button(
+    store_screens['Account'],
+    text='Submit',
+    command= lambda: [CSTMR.saveData(
+        app_screens,
+        store_screens,
+        edit_account['Name'].get(), 
+        edit_account['Address'].get(),
+        edit_account['Demographics']['Var'].get()
+    ), updateNameDisplay()]
+)
+submit_edits.grid()
+
+
 ''' Cart '''
 
-# coming soon...
+cart_sections = Frame(store_screens['Cart'])
+cart_sections.grid()
 
-''' Account '''
+customer_label = Label(cart_sections)
+customer_label.grid(row=0, column=0)
 
+# Computers cart
+comp_cart_display = Frame(cart_sections)
+comp_cart_display.grid(row=1, column=0, padx=20)
 
+comp_label = Label(comp_cart_display, text='Computers')
+comp_label.grid(row=0, column=0, padx=20)
 
+comp_items = None
 
+# Peripherals cart
+perip_cart_display = Frame(cart_sections)
+perip_cart_display.grid(row=2, column=0, padx=20)
+
+perip_label = Label(perip_cart_display, text='Peripherals')
+perip_label.grid(row=0, column=0, padx=20)
+
+perip_items = None
+
+# Games cart
+game_cart_display = Frame(cart_sections)
+game_cart_display.grid(row=3, column=0, padx=20)
+
+game_label = Label(game_cart_display, text='Games')
+game_label.grid(row=0, column=0, padx=20)
+
+game_items = None
+
+#
+#
+#
 
 ''' DO NOT TOUCH/PASS'''
 root.mainloop()

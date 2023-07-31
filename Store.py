@@ -106,9 +106,9 @@ class Macrohard:
                     print(f'{itemName}: {quantity}')
 
         # finally, assign all carts to CSTMR cart
-        customer.cart.update(comp_items)
-        customer.cart.update(perip_items)
-        customer.cart.update(games_items)
+        customer.cart['Computers'] = comp_items
+        customer.cart['Peripherals'] = perip_items
+        customer.cart['Games'] = games_items
 
         # test cart display
-        customer.display_cart()
+        #customer.display_cart()
