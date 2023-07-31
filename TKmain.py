@@ -53,34 +53,43 @@ switch_store_sections = {
     'Account': None
 }
 
+store_sec_frame = Frame(app_screens['StoreWindow'])
+store_sec_frame.grid(row=0, column=1, sticky='e')
+
 for sec in switch_store_sections:
     switch_store_sections[sec] = Button(
-        app_screens['StoreWindow'],
+        store_sec_frame,
         text=sec,
         command=lambda x=sec: hideBtn(x)
     )
     
-switch_store_sections['Store'].grid(row=1, column=0)
-switch_store_sections['Cart'].grid(row=1, column=2)
-switch_store_sections['Checkout'].grid(row=3, column=0)
-switch_store_sections['Account'].grid(row=3, column=2)
+switch_store_sections['Store'].grid(row=0, column=1)
+switch_store_sections['Cart'].grid(row=0, column=2)
+switch_store_sections['Checkout'].grid(row=0, column=3)
+switch_store_sections['Account'].grid(row=0, column=4)
 
 
 
 ''' Account login window'''
 
 account_login = Frame(app_screens['AccountLogin'])
-account_login.grid()
+account_login.grid(row=1, column=0)
 
-greeting = Label(account_login, text='Welcome to Macrohard!')
+greetframe = Frame(app_screens['AccountLogin'])
+greetframe.grid(row=0, column=0)
+
+greeting = Label(greetframe, text='Welcome to Macrohard!')
 greeting.grid(row=0, column=0, pady=20)
 
 #enter user info
 login_assets = CSTMR.userInfoEntries(account_login)
 
+submit_frame = Frame(app_screens['AccountLogin'])
+submit_frame.grid(row=2, column=0, pady=30)
+
 #save user info to Customer()
 submit_info = Button(
-    account_login,
+    submit_frame,
     text='Submit',
     command= lambda: [CSTMR.saveData(
         app_screens,
@@ -106,9 +115,16 @@ def updateNameDisplay():
 store = Frame(store_screens['Store'])
 store.grid()
 
+user_stats = Frame(store)
+user_stats.grid(row=0, column=0)
+
 #display user name
-name_label = Label(store)
-name_label.grid()
+name_label = Label(user_stats)
+name_label.grid(row=0, column=0, padx=30)
+
+#cart quant
+cart_quant_label = Label(user_stats, text=f'Cart: 0 items')
+cart_quant_label.grid(row=0, column=1, padx=30)
 
 #Comps, Perips, Games sections
 store_menu = Frame(store)
@@ -180,19 +196,41 @@ def updateCarts():
     perip_items = CSTMR.buildCartLbls('Peripherals', perip_cart_display)
     game_items = CSTMR.buildCartLbls('Games', game_cart_display)
 
+    tot_quant=0
+    for quant in comp_cart['Quantity']:
+        tot_quant += quant.get()
+    
+    for quant in perip_cart['Quantity']:
+        tot_quant += quant.get()
+         
+    for quant in games_cart['Quantity']:
+        tot_quant += quant.get()
+    
+    cart_quant_label.config(text=f'Cart: {tot_quant} items')
+
 #Show Computers, hide Peripherals, Games
 catalog_frames['Peripherals'].grid_forget()
 catalog_frames['Games'].grid_forget()
 
 
 ''' Account '''
-acc_det_label = Label(store_screens['Account'], text='Account Details')
+
+acc_label_frame = Frame(store_screens['Account'])
+acc_label_frame.grid(row=0, column=0)
+
+acc_det_label = Label(acc_label_frame, text='Account Details')
 acc_det_label.grid(pady=20)
 
-edit_account = CSTMR.userInfoEntries(store_screens['Account'])
+acc_edit_frame = Frame(store_screens['Account'])
+acc_edit_frame.grid(row=1, column=0)
+
+edit_account = CSTMR.userInfoEntries(acc_edit_frame)
+
+acc_submit_frame = Frame(store_screens['Account'])
+acc_submit_frame.grid(row=2, column=0, pady=30)
 
 submit_edits = Button(
-    store_screens['Account'],
+    acc_submit_frame,
     text='Submit',
     command= lambda: [CSTMR.saveData(
         app_screens,
@@ -218,7 +256,7 @@ comp_cart_display = Frame(cart_sections)
 comp_cart_display.grid(row=1, column=0, padx=20)
 
 comp_label = Label(comp_cart_display, text='Computers')
-comp_label.grid(row=0, column=0, padx=20)
+comp_label.grid(row=0, column=0, pady=20)
 
 comp_items = None
 
@@ -227,7 +265,7 @@ perip_cart_display = Frame(cart_sections)
 perip_cart_display.grid(row=2, column=0, padx=20)
 
 perip_label = Label(perip_cart_display, text='Peripherals')
-perip_label.grid(row=0, column=0, padx=20)
+perip_label.grid(row=0, column=0, pady=20)
 
 perip_items = None
 
@@ -236,9 +274,18 @@ game_cart_display = Frame(cart_sections)
 game_cart_display.grid(row=3, column=0, padx=20)
 
 game_label = Label(game_cart_display, text='Games')
-game_label.grid(row=0, column=0, padx=20)
+game_label.grid(row=0, column=0, pady=20)
 
 game_items = None
+
+
+''' Checkout '''
+
+# display cart again w/ Place Order btn
+# checkout_items = Frame(store_screens['Checkout'])
+# checkout_items.grid(row=0, column=0)
+
+
 
 #
 #

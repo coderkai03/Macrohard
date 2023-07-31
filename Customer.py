@@ -65,19 +65,19 @@ class Customer(Person):
         entry_vars[2] = StringVar(value=0) #set radio buttons to 0
 
         name_label = Label(root, text='Name: ')
-        name_label.grid(row=1, column=0)
+        name_label.grid(row=1, column=0, sticky='w')
 
         name_entry = Entry(root, textvariable=entry_vars[0])
         name_entry.grid(row=1, column=1)
 
         address_label = Label(root, text='Address: ')
-        address_label.grid(row=2, column=0)
+        address_label.grid(row=2, column=0, sticky='w')
 
         address_entry = Entry(root, textvariable=entry_vars[1])
         address_entry.grid(row=2, column=1)
 
         demog_label = Label(root, text='Apply discount:')
-        demog_label.grid(row=3, column=0)
+        demog_label.grid(row=3, column=0, sticky='w')
         demog_radio = dict()
         demog_radio['Student'] = Radiobutton(root, text='Student', variable=entry_vars[2], value='Student')
         demog_radio['Veteran'] = Radiobutton(root, text='Veteran', variable=entry_vars[2], value='Veteran')
