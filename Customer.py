@@ -96,9 +96,13 @@ class Customer(Person):
                 }
         }
     
-    def saveData(s, roots, save_name, save_address, save_discount):
+    def saveData(s, roots, screens, save_name, save_address, save_discount):
         roots['AccountLogin'].pack_forget()
         roots['StoreWindow'].pack(anchor='center', padx=200, pady=50)
+        
+        for scr in screens:
+            if scr != 'Store':
+                screens[scr].grid_forget()
 
         s.name = save_name
         s.address = save_address
