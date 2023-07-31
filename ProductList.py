@@ -15,11 +15,11 @@ class ProductList:
     ]
 
     peripherals = [
-        ["Logitech G Pro Mechanical Keyboard", 100],
-        ["Razer DeathAdder Elite Gaming Mouse", 50],
-        ["Dell Ultrasharp U2718Q Monitor", 300],
-        ["Bose QuietComfort 35 II Headphones", 200],
-        ["Harman Kardon SoundSticks III Speakers", 100],
+        ["Logitech Keyboard", 100],
+        ["Razer Gaming Mouse", 50],
+        ["Dell Ultrasharp Monitor", 300],
+        ["Bose QuietComfort Headphones", 200],
+        ["Harman Kardon Speakers", 100],
         ["Logitech MX Master 3 Mouse", 100],
         ["Apple Magic Keyboard", 100],
         ["Apple Magic Mouse 2", 100],
@@ -28,7 +28,7 @@ class ProductList:
     ]
 
     games = [
-        ["The Legend of Zelda: Tears of the Kingdom", 60],
+        ["The Legend of Zelda", 60],
         ["Spiderman: Miles Morales", 60],
         ["Cyberpunk 2077", 60],
         ["The Witcher 3: Wild Hunt", 60],

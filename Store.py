@@ -44,12 +44,12 @@ class Macrohard:
     
     ''' UI FUNCS '''
 
-    def createMenuBtn(s, store_menu, cat_frames, label, r, c):
+    def createMenuBtn(s, store_menu, cat_frames, label, c):
         return Button(
                 store_menu,
                 text=label,
                 command=lambda x=label: s.hideCatalogs(x, cat_frames)
-            ).grid(row=r, column=c)
+            ).grid(row=0, column=c)
     
     def hideCatalogs(s, frame, catalog_frames):
         print(f'Showing {frame, catalog_frames}')
@@ -58,12 +58,12 @@ class Macrohard:
                 catalog_frames[cat].grid_forget()
                 print(f'Forgot {cat}!')
                 # mid_prog=True
-        catalog_frames[frame].grid()
+        catalog_frames[frame].grid(row=2, column=0)
         print(f'Rendered {frame}!')
 
     def buildCatAssets(s, root_frame, frame, cat_frames, col, label):
         menu = s.allprods.buildCatalog(frame, s.allprods.categories[label], col)
-        frame_button = s.createMenuBtn(root_frame, cat_frames, label, 0, col)
+        frame_button = s.createMenuBtn(root_frame, cat_frames, label, col)
         return {
             'Menu': menu,
             'MenuButton': frame_button
