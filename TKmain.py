@@ -3,8 +3,8 @@ import tkinter.font as tkFont
 from Customer import Customer
 from View import View
 from ProductList import ProductList
-from Prompt import Prompt
 from Store import Macrohard
+from PIL import Image, ImageTk
 
 ''' Module assets '''
 MH = Macrohard('Rian')
@@ -14,6 +14,12 @@ CSTMR = Customer()
 root = Tk()
 root.title('Macrohard')
 #root.pack()
+
+# Logo
+img_path = 'msft-cool-logo.jpg'
+img = Image.open(img_path)
+img = img.resize((80, 80))
+logo = ImageTk.PhotoImage(img)
 
 app_screens = dict()
 app_screens['AccountLogin'] = Frame(root) #login screen (only shown once)
@@ -63,6 +69,9 @@ for sec in switch_store_sections:
         text=sec,
         command=lambda x=sec: hideBtn(x)
     )
+
+img_label = Label(store_sec_frame, image=logo)
+img_label.grid(row=0, column=0, padx=50, pady=50)
     
 switch_store_sections['Store'].grid(row=0, column=1)
 switch_store_sections['Cart'].grid(row=0, column=2)
@@ -81,6 +90,9 @@ greetframe.grid(row=0, column=0)
 
 greeting = Label(greetframe, text='Welcome to Macrohard!')
 greeting.grid(row=0, column=0, pady=20)
+
+img_label = Label(greetframe, image=logo)
+img_label.grid(row=0, column=1, padx=50, pady=50)
 
 #enter user info
 login_assets = CSTMR.userInfoEntries(account_login)
