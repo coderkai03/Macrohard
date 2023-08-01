@@ -1,4 +1,5 @@
 from Person import Person
+from ProductList import ProductList
 from tkinter import *
 import tkinter.font as tkFont
 
@@ -7,6 +8,7 @@ class Customer(Person):
     name = None
     address = None
     user_discount = None
+    subtotal = 0
 
     discount_opts = {
         'VETERAN': -.1,
@@ -17,6 +19,8 @@ class Customer(Person):
 
     cart = {} #items - quant
     cart_bill={} #subtotals -> grandtotal
+
+    allprods_copy = ProductList()
 
     #constructor
     # def __init__(s, info, disc):
@@ -128,6 +132,21 @@ class Customer(Person):
                 frame,
                 font=tkFont.Font(family='Space Mono', size=10),
                 text=f'{item:<30}{s.cart[cat][item]:>10.0f}'
+            ))
+
+            show_cat[r].grid(row=r+1, column=0, sticky='w')
+            r+=1
+
+    def buildCheckout(s, cat, frame):
+        show_cat = []
+        
+        r=0
+
+        for item in s.cart[cat]:
+            show_cat.append(Label(
+                frame,
+                font=tkFont.Font(family='Space Mono', size=10),
+                text=f'{item:<30}{s.cart[cat][item]:>10.0f}{s.allprods_copy.categories[cat][r][1]:>10.2f}'
             ))
 
             show_cat[r].grid(row=r+1, column=0, sticky='w')

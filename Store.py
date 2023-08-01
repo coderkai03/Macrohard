@@ -80,29 +80,36 @@ class Macrohard:
     def addToCart(s, customer, comp_vars, perip_vars, games_vars):
         comp_items={}
         print('\n\nComputer cart:')
+        item_idx=0
         for var in comp_vars['Items']:
             if var.get(): # box checked?
                 if comp_vars['Quantity'][comp_vars['Items'].index(var)].get(): # quant>0?
                     itemName, quantity = s.createCartEntry('Computers', var, comp_vars)
                     comp_items[itemName] = quantity # adds dict item to cart
+                    customer.subtotal += quantity * s.allprods.categories['Computers'][item_idx][1]
                     print(f'{itemName}: {quantity}')
+            item_idx+=1
 
         perip_items={}
         print('\n\nPeripheral cart:')
+        item_idx=0
         for var in perip_vars['Items']:
             if var.get(): # box checked?
                 if perip_vars['Quantity'][perip_vars['Items'].index(var)].get(): # quant>0?
                     itemName, quantity = s.createCartEntry('Peripherals', var, perip_vars)
                     perip_items[itemName] = quantity # adds dict item to cart
+                    customer.subtotal += quantity * s.allprods.categories['Peripherals'][item_idx][1]
                     print(f'{itemName}: {quantity}')
 
         games_items={}
         print('\n\nGames cart:')
+        item_idx=0
         for var in games_vars['Items']:
             if var.get(): # box checked?
                 if games_vars['Quantity'][games_vars['Items'].index(var)].get(): # quant>0?
                     itemName, quantity = s.createCartEntry('Games', var, games_vars)
                     games_items[itemName] = quantity # adds dict item to cart
+                    customer.subtotal += quantity * s.allprods.categories['Games'][item_idx][1]
                     print(f'{itemName}: {quantity}')
 
         # finally, assign all carts to CSTMR cart

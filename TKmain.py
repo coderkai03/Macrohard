@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter.font as tkFont
 from Customer import Customer
 from View import View
 from ProductList import ProductList
@@ -97,7 +98,7 @@ submit_info = Button(
         login_assets['Name'].get(), 
         login_assets['Address'].get(),
         login_assets['Demographics']['Var'].get()
-    ), updateNameDisplay()]
+    ), updateNameDisplay(), checkout_label.config(text=f'{CSTMR.name}\'s checkout')]
 )
 submit_info.grid()
 
@@ -208,6 +209,9 @@ def updateCarts():
     
     cart_quant_label.config(text=f'Cart: {tot_quant} items')
 
+    updateCheckout()
+    updateSubtotals()
+
 #Show Computers, hide Peripherals, Games
 catalog_frames['Peripherals'].grid_forget()
 catalog_frames['Games'].grid_forget()
@@ -238,7 +242,7 @@ submit_edits = Button(
         edit_account['Name'].get(), 
         edit_account['Address'].get(),
         edit_account['Demographics']['Var'].get()
-    ), updateNameDisplay()]
+    ), updateNameDisplay(), checkout_label.config(text=f'{CSTMR.name}\'s checkout')]
 )
 submit_edits.grid()
 
@@ -282,8 +286,123 @@ game_items = None
 ''' Checkout '''
 
 # display cart again w/ Place Order btn
-# checkout_items = Frame(store_screens['Checkout'])
-# checkout_items.grid(row=0, column=0)
+checkout_frame = Frame(store_screens['Checkout'])
+checkout_frame.grid(row=0, column=0)
+
+checkout_label = Label(checkout_frame)
+checkout_label.grid(row=1, column=0)
+
+checkout_lbls_frame = Frame(checkout_frame)
+checkout_lbls_frame.grid()
+
+def createTableLbls():
+    global checkout_label
+    global tableLabels
+
+    cols=0
+    for lbl in tableLabels:
+        if cols == 0:
+            lbl_text = f'{lbl:<50}'
+        elif cols == 1:
+            lbl_text = f'{lbl:>40}'
+        else:
+            lbl_text = f'{lbl:>20}'
+
+        tableLabels[lbl] = Label(checkout_lbls_frame, text=lbl_text)
+        tableLabels[lbl].grid(row=0, column=cols)
+
+        # if cols == 0:
+        #     tableLabels[lbl].config(anchor='w')
+        # elif cols == 2:
+        #     tableLabels[lbl].config(anchor='e')
+
+        cols+=1
+
+tableLabels = {
+    'Item name': None,
+    'Quantity': None,
+    'Price': None
+}
+createTableLbls()
+
+# for the checkout items
+checkout_categories = Frame(checkout_frame)
+checkout_categories.grid(row=3, column=0)
+
+# Computer checkout
+comp_checkout_frame = Frame(checkout_categories)
+comp_checkout_frame.grid(row=1, column=0)
+
+comp_check = None
+
+# Peripheral checkout
+perip_checkout_frame = Frame(checkout_categories)
+perip_checkout_frame.grid(row=2, column=0)
+
+perip_check = None
+
+# Game checkout
+game_checkout_frame = Frame(checkout_categories)
+game_checkout_frame.grid(row=3, column=0)
+
+game_check = None
+
+def updateCheckout():
+    global comp_check
+    global perip_check
+    global game_check
+
+    comp_check = CSTMR.buildCheckout('Computers', comp_checkout_frame)
+    perip_check = CSTMR.buildCheckout('Peripherals', perip_checkout_frame)
+    game_check = CSTMR.buildCheckout('Games', game_checkout_frame)
+
+# Final subtotals + bill
+def updateSubtotals():
+    print('UI SUBTOTAL', CSTMR.subtotal)
+    tax = CSTMR.subtotal*.0725
+    ship = CSTMR.subtotal*.1
+    disc = CSTMR.subtotal*CSTMR.user_discount
+    grand = CSTMR.subtotal + tax + ship + disc
+
+    lbl = 'Taxes'
+    tax_lbl.config(text=f'{lbl:<30}{equal:>10}{tax:>10.2f}')
+
+    lbl = 'Shipping'
+    ship_lbl.config(text=f'{lbl:<30}{equal:>10}{ship:>10.2f}')
+
+    lbl = 'Discount'
+    disc_lbl.config(text=f'{lbl:<30}{equal:>10}{disc:>10.2f}')
+
+    lbl = 'Grand total'
+    grnd_lbl.config(text=f'{lbl:<30}{equal:>10}{grand:>10.2f}')
+
+lbl = 'Subtotal'
+equal = '$'
+
+subtot_lbl = Label(
+    checkout_categories, 
+    font=tkFont.Font(family='Space Mono', size=10))
+subtot_lbl.grid(row=4, column=0, pady=(30, 0))
+
+tax_lbl = Label(
+    checkout_categories,
+    font=tkFont.Font(family='Space Mono', size=10))
+tax_lbl.grid(row=5, column=0)
+
+ship_lbl = Label(
+    checkout_categories,
+    font=tkFont.Font(family='Space Mono', size=10))
+ship_lbl.grid(row=6, column=0)
+
+disc_lbl = Label(
+    checkout_categories,
+    font=tkFont.Font(family='Space Mono', size=10))
+disc_lbl.grid(row=7, column=0)
+
+grnd_lbl = Label(
+    checkout_categories,
+    font=tkFont.Font(family='Space Mono', size=10))
+grnd_lbl.grid(row=8, column=0)
 
 
 
